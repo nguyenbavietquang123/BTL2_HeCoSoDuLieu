@@ -1,0 +1,158 @@
+
+
+
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(
+      content="width=device-width, initial-scale=1.0" 
+      name="viewport"
+      )
+    title Hoàn Tất Đăng Ký
+    link(
+      href="/css/styles.css" 
+      rel="stylesheet"
+      )
+  body
+    .container
+      // Sidebar
+      .sidebar
+        h3 Welcome
+        ul.menu
+          li
+            a(href="/index")
+              img(
+                alt="Home" 
+                src="/icons/home.png"
+                )
+              | Trang Chủ
+          li
+            a(href="/ung-vien")
+              img(
+                alt="Candidate" 
+                src="/icons/candidate.png"
+                )
+              | Ứng Viên
+          li
+            a(href="/nha-tuyen-dung")
+              img(
+                alt="Employer" 
+                src="/icons/employer.png"
+                )
+              | Nhà Tuyển Dụng
+          li
+            a(href="/tin-tuyen-dung")
+              img(
+                alt="Job Post" 
+                src="/icons/job-post.png"
+                )
+              | Tin Tuyển Dụng
+      // Main Content
+      .content
+        h1 Hoàn Tất Đăng Ký
+        p Vui lòng nhập thông tin bên dưới để hoàn tất đăng ký.
+        form.register-form(
+          enctype="multipart/form-data" 
+          method="POST" 
+          id="registerForm"
+          )
+          input(type="hidden" name="username" value=userData.Username)
+          input(type="hidden" name="password" value=userData.Password)
+          label(for="avatar") Avatar:
+          input#avatar(
+            
+            accept="image/*" 
+            name="avatar" 
+            type="file"
+            )
+          label(for="gender") Giới Tính:
+          select#gender(
+            required="" 
+            name="gender"
+            )
+            option(value="") -- Chọn giới tính --
+            option(value="Male") Nam
+            option(value="Female") Nữ
+            option(value="Other") Khác
+          label(for="phone") Số Điện Thoại:
+          input#phone(
+            required="" 
+            pattern="[0-9]{10,15}" 
+            placeholder="Nhập số điện thoại" 
+            name="phone" 
+            type="tel"
+            )
+          label(for="birthdate") Ngày Sinh:
+          input#birthdate(
+            required="" 
+            name="birthdate" 
+            type="date"
+            )
+          label(for="address") Địa Chỉ:
+          input#address(
+            required="" 
+            placeholder="Nhập địa chỉ" 
+            name="address" 
+            type="text"
+            )
+          label(for="lastname") Họ:
+          input#lastname(
+            required="" 
+            placeholder="Nhập họ" 
+            name="lastname" 
+            type="text"
+            )
+          label(for="middlename") Tên Đệm:
+          input#middlename(
+            placeholder="Nhập tên đệm" 
+            name="middlename" 
+            type="text"
+            )
+          label(for="firstname") Tên:
+          input#firstname(
+            required="" 
+            placeholder="Nhập tên" 
+            name="firstname" 
+            type="text"
+            )
+          label(for="role") Chức Vụ:
+          select#role(
+            required="" 
+            name="role"
+            )
+            option(value="") -- Chọn chức vụ --
+            option(value="Candidate") Ứng Viên  
+            option(value="Scout") Nhà Tuyển Dụng
+          button.btn-submit(type="submit") Hoàn Tất
+    script.
+      // Xử lý sự kiện submit bằng JavaScript
+      document.getElementById('registerForm').addEventListener('submit', async function (e) {
+        e.preventDefault(); // Ngăn chặn hành vi submit mặc định
+        
+        // Tạo đối tượng FormData từ form
+        const formData = new FormData(this);
+        try {
+          // Gửi yêu cầu POST với FormData thay vì JSON
+          const response = await fetch('/register_submit', {
+            method: 'POST',
+            body: formData // Gửi trực tiếp FormData, không cần JSON.stringify
+          });
+          
+          // Kiểm tra kết quả
+          if (response.status === 200) {
+            alert('Đăng ký thành công!'); // Hiển thị thông báo thành công
+            if (formData.get('role') === 'Candidate') {
+              window.location.href = '/user_info?Username=' + formData.get('username') + '&Password=' + formData.get('password');
+            } else if (formData.get('role') === 'Scout') {
+              window.location.href = '/scout_info?Username=' + formData.get('username') + '&Password=' + formData.get('password');
+            }
+          } else {
+            const error = await response.json();
+            alert('Đăng ký thất bại! ' + (error.message || 'Có lỗi xảy ra.'));
+          }
+        } catch (err) {
+          console.error(err.message);
+          alert('Đã xảy ra lỗi trong quá trình gửi yêu cầu.', er);
+        }
+      });

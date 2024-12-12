@@ -1,0 +1,123 @@
+doctype html 
+head 
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Đơn ứng tuyển
+    link(rel="stylesheet", href="css/submittedApplication.css")
+    link(href="https://fonts.googleapis.com/icon?family=Material+Icons", rel="stylesheet")
+    link(rel="preconnect", href="https://fonts.googleapis.com")
+    link(rel="preconnect", href="https://fonts.gstatic.com", crossorigin)
+    link(href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,700;1,700&family=Montserrat:ital@0;1&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap", rel="stylesheet")
+body 
+    header
+        nav
+            div(class="logo")
+                a(href="/index") 
+                    img(src="images/nursewebsitelogo.png", alt="")
+                h3 WEBSITE 
+                    br
+                    | TUYỂN DỤNG
+            ul(class="sub-nav")
+                a(href="/") Trang chủ
+                li
+                    a(href="#lucluongyta") Danh sách
+                li Bài kiểm tra
+                li Cẩm nang 
+                li Tin tức
+            ul 
+                button.login-button
+                    a(href="/login") Đăng nhập
+            ul
+                button.signin-button
+                    a(href="/register") Đăng ký
+    .container
+        .content
+            .info
+                .info-content
+                    h1.DNYT Đơn ứng tuyển
+                .buttons
+                    button Tra cứu
+                    button Chi tiết
+    div(class="container1")
+        div(class="search")
+            button(type="button", id="filter-button", class="filter-button")
+                | Bộ lọc
+            div(class="filter-form" id="filterForm", style="display: none;")
+                form(action="/submittedApplication", method="get", id="filter-form")
+                    h3 Tìm kiếm nâng cao
+                    div
+                        label(for="Job_Title") Tên công việc:
+                        input(type="text", name="Job_Title", id="Job_Title", placeholder="Tên công việc")
+                    div
+                        label(for="News_ID") Mã tin tuyển dụng:
+                        input(type="text", name="News_ID", id="News_ID", placeholder="Mã tin tuyển dụng")
+                    div
+                        label(for="Education") Học vấn:
+                        input(type="text", name="Education", id="Education", placeholder="Học vấn")
+                    div
+                        button(type="submit", id="apply-filter-button") Áp dụng bộ lọc
+                    button(type="button", id="close-filter-button") Đóng
+        section(class="table")
+            h2 Danh sách các ứng viên đã ứng viên đã ứng tuyển vào công việc
+            p(class="chuthich") 
+            div(class="table-wrapper")
+                table(class="content-table",id="myTable")
+                    thead   
+                        tr 
+                            th Mã           
+                            th Tên công việc          
+                            th Tên ứng viên            
+                            th Giới tính           
+                            th Email
+                            th SĐT 
+                            th Học vấn 
+                            th Chuyên ngành
+                            th Ngày phỏng vấn
+                            th Trạng thái
+                            th Thao tác
+                    tbody
+                    -var i=0
+                    each item in submit       
+                        tr(id=item.Candidate_ID)  
+                            td #{item.News_ID}
+                            td(id=item.Scout_ID) #{item.Job_Position}
+                            td #{item.Lastname} #{item.Middlename} #{item.Firstname}                               
+                            td #{item.Gender} 	                               
+                            td #{item.Email}	                              
+                            td #{item.Phone} 
+                            td #{item.School}	
+                            td #{item.Major}	
+                            td #{item.Interview_Date}
+                            td #{item.Application_Status}		
+                            td 
+                                button(
+                                    button-delete 
+                                )
+                                    img(src="images/bx-trash.svg")
+                                button(
+                                    class= "button-edit"
+                                    id=++i
+                                )
+                                    img(src="images/bx-edit-alt.svg")                     
+    // Modal structure
+    div(class="modal" id="editModal")
+        div(class="modal-content")
+            button(id="close-button") &times;
+            h2 Chỉnh sửa thông tin
+            form(id="edit-form" action="/submittedApplication" method="post")
+                h4 Mã tin tuyển dụng: 
+                input(type="text" id="ID" name="ID" readonly)
+                h4 Mã ứng viên
+                input(type="text" id="Candidate_ID" name="Candidate_ID" readonly)
+                h4 Mã nhà tuyển dụng
+                input(type="text" id="Scout_ID" name="Scout_ID" readonly)
+                h4 Ngày phỏng vấn:
+                input(type="date" id="Interview_Date" name="Interview_Date")
+                h4 Trạng thái ứng tuyển:
+                select(id="Application_Status" name="Application_Status" )
+                    option(value="Dang xu li") Đang xử lý
+                    option(value="Thanh cong") Chấp nhận
+                    option(value="Tu choi") Từ chối   
+            button(id="submitEdit") Lưu thay đổi      
+    script(src="js/handleEdit.js") 
+    script(src="js/handleFilter.js")

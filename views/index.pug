@@ -1,0 +1,106 @@
+doctype html 
+head 
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Thuốc | Bệnh viện Đa khoa MINONA
+    link(rel="stylesheet", href="css/medicine-info-final.css")
+    link(href="https://fonts.googleapis.com/icon?family=Material+Icons", rel="stylesheet")
+    link(rel="preconnect", href="https://fonts.googleapis.com")
+    link(rel="preconnect", href="https://fonts.gstatic.com", crossorigin)
+    link(href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,700;1,700&family=Montserrat:ital@0;1&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap", rel="stylesheet")
+body 
+    header
+        nav
+            div(class="logo")
+                a(href="/index") 
+                    img(src="images/nursewebsitelogo.png", alt="")
+                h3 BỆNH VIỆN 
+                    br
+                    | ĐA KHOA MIMONA
+            ul(class="sub-nav")
+                a(href="/") Trang chủ
+                li
+                    a(href="#lucluongyta") Danh sách
+                li Chi phí khám 
+                li Đặt lịch 
+                li Tin tức
+            ul 
+                button.login-button
+                    a(href="/login") Đăng nhập
+            ul
+                button.signin-button
+                    a(href="/register") Đăng ký
+    .container
+        .content
+            .info
+                .info-content
+                    h1.DNYT Kho thuốc
+                    p
+                        | Danh sách thuốc phong phú tại Kho thuốc của bệnh viện, bao gồm cả thuốc tổng hợp và chi tiết cho
+                        | mọi tình huống y tế, đảm bảo sự đa dạng và chất lượng trong chăm sóc sức khỏe.
+                .buttons
+                    button Tra cứu
+                    button Chi tiết
+    div(class="container1")
+        div(class="thanh_tim_kiem") 
+            form( id="type-form")
+                select(name="typeofdisplay", id="typeofdisplay")
+                    option(value="") Tìm kiếm theo
+                    option(value="op1") Sắp xếp theo thứ tự bảng chữ cái 
+                    option(value="op2") Sắp xếp theo hạn sử dụng
+                button(type="submit", id="submit-button") Xác nhận 
+        div(class="search")
+            form(action="",method='get',id="search-form")
+                input(type="text", name="medicineSearch",id="medicineSearch",placeholder="Tìm kiếm",value=medicineSearch)
+                button(type="submit", id="search-button",class="KinhLup-button") 
+                    img(src="images/search-button-svg.svg")
+        section(class="table")
+            h2 Danh sách các ứng viên đã ứng viên đã ứng tuyển vào công việc
+            p(class="chuthich") 
+            div(class="table-wrapper")
+                table(class="content-table",id="myTable")
+                    thead   
+                        tr 
+                            th Mã           
+                            th Tên công việc          
+                            th Tên ứng viên            
+                            th Giới tính           
+                            th Email
+                            th SĐT 
+                            th Học vấn 
+                            th Chuyên ngành
+                            th Ngày phỏng vấn
+                            th Trạng thái
+                            th Thao tác
+                    tbody
+                    -var i=0
+                    each item in submit       
+                        tr()  
+                            td #{item.News_ID}
+                            td #{item.Job_Position}
+                            td #{item.Lastname} #{item.Middlename} #{item.Firstname}                               
+                            td #{item.Gender} 	                               
+                            td #{item.Email}	                              
+                            td #{item.Phone} 
+                            td #{item.School}	
+                            td #{item.Major}	
+                            td #{item.Interview_Date}
+                            td #{item.Application_Status}		
+                            td 
+                                button(
+                                    button-delete 
+                                )
+                                    img(src="images/bx-trash.svg")
+                                a(
+                                    button-edit
+                                )
+                                    img(src="images/bx-edit-alt.svg")                     
+    form(
+        action="",
+        method="POST",
+        id="form-delete-addMedicine"
+        data-path='/manage-medicine/delete-product'
+    )       
+    script(src="client/js/search.js") 
+    script(src="client/js/filter.js") 
+    script(src="client/js/deleteAddMedicine.js")

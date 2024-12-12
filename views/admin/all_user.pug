@@ -1,0 +1,65 @@
+doctype html 
+head 
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Admin 
+    link(rel="stylesheet", href="/css/medicine-info-final.css")
+    link(href="https://fonts.googleapis.com/icon?family=Material+Icons", rel="stylesheet")
+    link(rel="preconnect", href="https://fonts.googleapis.com")
+    link(rel="preconnect", href="https://fonts.gstatic.com", crossorigin)
+    link(href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,700;1,700&family=Montserrat:ital@0;1&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap", rel="stylesheet")
+body 
+    header
+        nav
+            a(href="/index") 
+                        img(src="/images/nursewebsitelogo.png", alt="")  
+        section(class="table")
+            h2(style="text-align: center;") Danh sách các user
+            p(class="chuthich") 
+                table(class="content-table",id="myTable")
+                    thead   
+                        tr 
+                            th ID           
+                            th Username          
+                            th Lastname            
+                            th Firstname           
+                            th Phone
+                            th Address
+                            th
+                    tbody
+                    if users && users.length > 0
+                        each item in users
+                            tr()    
+                                td #{item.User_ID}
+                                td #{item.Username}
+                                td #{item.Lastname}
+                                td #{item.Firstname}                               
+                                td #{item.Phone}                               
+                                td #{item.Address}                              
+                                td 
+                                    button(type="button", class="delete-button submit-button" value=item.User_ID) delete
+                    else
+                        tr
+                            td(colspan="10", style="text-align: center;") Không tìm thấy người dùng nào
+        script. 
+            document.querySelectorAll('.delete-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const userId = this.value;
+                    const body = {
+                        User_ID: userId
+                    };
+                    fetch(`/admin/delete_user`, {
+                        method: 'DELETE',
+                        body: JSON.stringify(body),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }).then(response => response.json())
+                    .then(data => {
+                        alert('Xóa người dùng thành công');
+                        location.reload();
+                    }).catch(error => {
+                        alert('Xóa người dùng thất bại', error);
+                    });
+                });
+            });

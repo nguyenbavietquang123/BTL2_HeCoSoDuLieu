@@ -1,0 +1,92 @@
+doctype html 
+head 
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title SOLUTION MINONA DEV
+    link(rel="stylesheet", href="css/medicine-info-final.css")
+    link(href="https://fonts.googleapis.com/icon?family=Material+Icons", rel="stylesheet")
+    link(rel="preconnect", href="https://fonts.googleapis.com")
+    link(rel="preconnect", href="https://fonts.gstatic.com", crossorigin)
+    link(href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,700;1,700&family=Montserrat:ital@0;1&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap", rel="stylesheet")
+body 
+    header
+        nav
+            div(class="logo")
+                a(href="/index") 
+                    img(src="images/nursewebsitelogo.png", alt="")
+                h3 
+                    br
+                    | SOLUTION MINONA DEV
+            ul(class="sub-nav")
+                a(href="/") Trang chủ
+                li
+                    a(href="#lucluongyta") Cẩm nang Nghề Nghiệp
+                li Việc Làm & Tuyển Dụng
+                li Career Hub 
+                li Tin tức
+            ul 
+                button.login-button
+                    a(href="/login") Đăng nhập
+            ul
+                button.signin-button
+                    a(href="/register") Đăng ký
+    .container
+        .content
+            .info
+                .info-content
+                    h1.DNYT Tin tuyển dụng
+                    p
+                        | Tạo việc làm tạo công ích
+                        | Quote này kia này kia
+                .buttons
+                    button Tra cứu
+                    button Chi tiết
+    div(class="container1")
+        div(class="thanh_tim_kiem") 
+            form( id="type-form")
+                select(name="typeofdisplay", id="typeofdisplay")
+                    option(value="") Tìm kiếm theo
+                    option(value="op1") Sắp xếp theo thứ tự bảng chữ cái 
+                    option(value="op2") Sắp xếp theo hạn sử dụng
+        div(class="search")
+            form(action="",method='get',id="search-form")
+                input(type="text", name="medicineSearch",id="medicineSearch",placeholder="Tìm kiếm",value=medicineSearch)
+                button(type="submit", id="search-button",class="KinhLup-button") 
+                    img(src="images/search-button-svg.svg")
+        section(class="table")
+            h2 Danh sách các tin tuyển dụng
+            p(class="chuthich") 
+                table(class="content-table",id="myTable")
+                    thead   
+                        tr 
+                            th Mã           
+                            th Tên tin tuyển dụng          
+                            th Mức lương            
+                            th Nơi làm việc           
+                            th Deadline
+                            th Ngày đăng 
+                            th Quyền lợi  
+                            th Chuyên ngành
+                            th Mô tả
+                            th Số lượng tuyển
+                            th
+                    tbody
+                    if news && news.length > 0
+                        each item in news
+                            tr()    
+                                td #{item.News_ID}
+                                td #{item.Job_Position}
+                                td #{item.Salary}                               
+                                td #{item.Location}                               
+                                td #{item.Deadline}                              
+                                td #{item.Post_Date} 
+                                td #{item.Benefits}
+                                td #{item.Job_Position}
+                                td #{item.Job_Description}
+                                td #{item.Required_Number}
+                                td 
+                                    button(type="button", id="submit-new-button", class="submit-button") xem
+                    else
+                        tr
+                            td(colspan="10", style="text-align: center;") Không tìm thấy tin tuyển dụng nào
+    

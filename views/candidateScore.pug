@@ -1,0 +1,82 @@
+doctype html 
+head 
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Bảng điểm
+    link(rel="stylesheet", href="css/recruitmentNews.css")
+    link(href="https://fonts.googleapis.com/icon?family=Material+Icons", rel="stylesheet")
+    link(rel="preconnect", href="https://fonts.googleapis.com")
+    link(rel="preconnect", href="https://fonts.gstatic.com", crossorigin)
+    link(href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,700;1,700&family=Montserrat:ital@0;1&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap", rel="stylesheet")
+body 
+    header
+        nav
+            div(class="logo")
+                a(href="/index") 
+                    img(src="images/nursewebsitelogo.png", alt="")
+                h3 WEBSITE 
+                    br
+                    | TUYỂN DỤNG
+            ul(class="sub-nav")
+                a(href="/") Trang chủ
+                li
+                    a(href="#lucluongyta") Danh sách
+                li Bài kiểm tra
+                li Cẩm nang 
+                li Tin tức
+            ul 
+                button.login-button
+                    a(href="/login") Đăng nhập
+            ul
+                button.signin-button
+                    a(href="/register") Đăng ký
+    .container
+        .content
+            .info
+                .info-content
+                    h1.DNYT Bảng điểm
+                .buttons
+                    button Tra cứu
+                    button Chi tiết
+    div(class="average-container", style="display: none;" id="averageSalaries")
+        h3 Nhận xét dành cho bạn
+        h3 #{level}
+
+                // Dynamically populate rows here using JS
+    button(class="average-button", id="showAverageButton") Xem nhận xét
+    div(class="container1")
+        div(class="thanh_tim_kiem") 
+        div(class="search")
+            form(action="",method='get',id="search-form")
+                button(type="button", id="filter-button", class="filter-button")
+                    | Bộ lọc
+        section(class="table")
+            h2 Bảng điểm của ứng cử viên #{candidateName}
+            p(class="chuthich") 
+            div(class="table-wrapper")
+                table(class="content-table",id="myTable")
+                    thead   
+                        tr  
+                            th STT 
+                            th Tên bài kiểm tra         
+                            th Thời gian làm bài        
+                            th Ngày làm bài         
+                            th Số câu hỏi          
+                            th Số câu trả lời đúng
+                            th Điểm
+                    tbody
+                    -var i=0
+                    each item in candidateResult       
+                        tr  
+                            td #{++i} 
+                            td #{item.Test_Name}
+                            td #{item.Duration}
+                            td #{item.Test_Date_Formatted}                            
+                            td #{item.Num_Of_Question} 	                               
+                            td #{item.Nums_Of_Correct_Answers}	                              
+                            td #{item.scores}     
+    script(src="js/handleRecruitmentEdit.js") 
+    script(src="js/handleFilter.js")
+    script(src="js/handleAddingRecruitment.js")
+    script(src="js/handleDeletingRecruitment.js") 
+    script(src="js/handleAverageSalary.js") 

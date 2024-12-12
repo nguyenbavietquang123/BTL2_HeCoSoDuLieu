@@ -1,0 +1,662 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+
+html {
+    font-family: "Open Sans", sans-serif;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    background-color: #dddddd;
+}
+
+
+.DNYT {
+    font-family: "DM Serif Display", serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.col-2 {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+
+header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    background-color: #fff;
+}
+
+header nav {
+    align-items: center;
+    display: grid;
+    width: 90%;
+    margin: auto auto;
+    gap: 10px;
+    grid-template-columns: auto 1fr auto auto;
+    height: 60px;
+}
+
+header nav .logo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+header nav .logo:hover {
+    cursor: pointer;
+}
+
+header nav .logo img {
+    height: 2.5rem;
+}
+
+header nav .sub-nav {
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+    font-size: 1rem;
+    width: 60%;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+header nav .sub-nav li:hover {
+    cursor: pointer;
+    color: #00439c;
+}
+
+header nav .sub-nav .root {
+    display: flex;
+}
+
+header nav .sub-nav .sub-sub-nav {
+    display: none;
+}
+
+header nav .icon {
+    display: flex;
+    list-style-type: none;
+    gap: 1rem;
+}
+
+header nav .sub-nav li {
+    margin-right: 10px;
+}
+
+header nav .sub-nav li a {
+    color: #000;
+    text-decoration: none;
+}
+
+header nav .sub-nav li a:hover {
+    color: #00439c;
+}
+
+header nav .icon li:not(li.active) {
+    background-color: #0937ec;
+    border-radius: 30px;
+    padding: 1px 3px;
+}
+
+header nav .icon li.active {
+    border: solid 2px #000;
+    border-radius: 30px;
+    padding: 0px 3px;
+}
+
+header nav .icon li a {
+    color: white;
+    text-decoration: none;
+}
+
+header nav .icon li.active a {
+    color: #000;
+}
+
+.login-button a {
+    position: absolute;
+    margin-right: 120px;
+    top: 10px;
+    right: 10px;
+    padding: 8px 18px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.login-button:hover a {
+    background-color: #0056b3;
+    color: white;
+    text-decoration: none;
+}
+
+.signin-button a {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 8px 25px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.signin-button:hover a {
+    background-color: #0056b3;
+    color: white;
+    text-decoration: none;
+}
+
+.container {
+    position: relative;
+    height: 550px;
+    width: 100%;
+    background-image: url(../images/background-web.jpg);
+    background-position: auto center;
+    background-size: cover;
+    border-radius: 0px;
+}
+
+.container .info {
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    right: 5%;
+    transform: translate(0, -50%);
+    max-width: 600px;
+}
+
+.container .content .info-content {
+    color: #fff;
+}
+
+.container .content .info-content h1 {
+    font-size: 4.5rem;
+}
+
+.container .content .info-content p {
+    margin-top: 50px;
+}
+
+.container .info .buttons {
+
+    margin-top: 10px;
+}
+
+.container .info .buttons button {
+    padding: 10px;
+    margin: 5px;
+    margin-left: 0;
+    border-radius: 15px;
+    border: none;
+}
+
+.container .info .buttons button:hover {
+    cursor: pointer;
+    background-color: #000;
+    color: #fff;
+
+}
+
+.container .info .buttons button:first-child:hover {
+    cursor: pointer;
+    background-color: #0937ec;
+    color: #fff;
+}
+.hethan {
+    color: red
+}
+
+
+
+
+.container1 {
+    position: relative;
+    max-width: 1600px;
+    width: 100%;
+    background: #fff;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
+
+form select {
+    width: 15%;
+    padding: 5px;
+    position: relative;
+    left: 220px;
+    border-radius: 6px;
+}
+
+#submit-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 8px 25px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+#submit-button:hover {
+    background-color: #0056b3;
+}
+
+#medicineSearch {
+    width: 555px;
+    padding: 5px;
+}
+
+.search {
+    display: flex;
+    width: 50%;
+    padding: 5px;
+    position: absolute;
+    top: 20px;
+    right: 200px;
+
+    /* button {
+        border: none;
+        position: flex;
+        right: 9px;
+        top: 0px;
+    } */
+
+    input {
+        border-radius: 6px;
+        padding-right: 28px;
+    }
+}
+
+.search img {
+    height: 10px;
+}
+
+.content-table {
+    border-collapse: collapse;
+    position: sticky;
+    /* margin-left: auto;
+margin-right: auto; */
+    width: 100%;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    overflow-y: scroll;
+}
+
+.content-table thead tr {
+    /* display: block; */
+    text-align: left;
+    /* width: 100%; */
+}
+.content-table tbody tr {
+    /* display: block; */
+    text-align: left;
+    /* width: 100%; */
+}
+
+.content-table th,
+.content-table td {
+    padding: 12px 15px;
+    /* width: 100%; */
+}
+
+.content-table th {
+    position: sticky;
+    top: 0px;
+    background-color: rgb(106, 155, 219);
+}
+
+.table {
+    margin-bottom: 50px;
+    margin-top: 30px;
+}
+
+.table-wrapper {
+    max-width: 1600px;
+    max-height: 700px;
+    overflow-y: scroll;
+    margin-top: 50px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.content-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+    background-color: #fff;
+}
+
+.container1 .table h2 {
+    text-align: center;
+    /* Căn giữa văn bản */
+    margin: 0px;
+}
+
+.Edit-button {
+    color: #fff;
+    padding: 8px 25px;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: 400;
+    transition: all 0.2s ease;
+    background-color: rgb(46, 103, 184);
+}
+
+.Add-button {
+    position: absolute;
+    padding: 8px 25px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    bottom: 20px;
+    right: 20px;
+    margin-right: 160px;
+    margin-bottom: 10px;
+}
+
+.KinhLup-button {
+    position: absolute;
+    padding: 8px 8px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+input:hover {
+    background-color: #fff;
+}
+
+select:hover {
+    background-color: #fff;
+}
+tbody{
+    overflow: auto;
+}
+/* Form */
+.filter-button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    margin-left: 700px;
+    border-radius: 4px;
+}
+.search-button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    margin-left: 8px;
+    border-radius: 4px;
+}
+
+.filter-form {
+    position: absolute;
+    top: 50px;
+    width: 500px;
+    margin-left: 900px;
+    margin-top: 10px;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.filter-form h3 {
+    margin-top: 0;
+}
+
+.filter-form div {
+    margin-bottom: 15px;
+}
+
+.filter-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.filter-form input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#apply-filter-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+#close-filter-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+/* Modal Popup */
+/* Modal Popup */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center; /* Canh giữa theo chiều dọc */
+    justify-content: center; /* Canh giữa theo chiều ngang */
+    z-index: 1000;
+}
+
+.modal-content {
+    margin: auto;
+    background: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    width: 50%;
+    max-width: 90%; /* Đảm bảo modal hiển thị tốt trên màn hình nhỏ */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    animation: fadeIn 0.3s ease-out; /* Hiệu ứng hiện lên */
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+.close-add-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+.modal-content h2 {
+    margin-top: 0;
+}
+
+.modal-content div {
+    margin-bottom: 15px;
+}
+
+.modal-content label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.modal-content input,
+.modal-content textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#save-edit {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+/* Hiệu ứng fade-in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+.add-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007BFF; /* Màu nền */
+    color: white;
+    border: none;
+    border-radius: 8px; /* Bo góc nhẹ để đẹp hơn */
+    width: 150px; /* Chiều rộng nút */
+    height: 50px; /* Chiều cao nút */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    z-index: 1000;
+    font-size: 16px; /* Cỡ chữ */
+    font-weight: bold; /* Chữ đậm */
+    text-transform: uppercase; /* Viết hoa toàn bộ */
+    transition: background-color 0.3s;
+}
+
+.add-button:hover {
+    background-color: #0056b3; /* Đổi màu khi hover */
+}
+
+/* Container for Average Salaries */
+#averageSalaries {
+    margin: 20px auto;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+}
+
+/* Heading */
+#averageSalaries h3 {
+    margin-bottom: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    color: #333;
+    text-align: center;
+}
+
+/* Table Styling */
+.average-salary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+.average-salary-table thead th {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-weight: 600;
+    border-bottom: 2px solid #ddd;
+}
+
+.average-salary-table tbody td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.average-salary-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Button Styling */
+.average-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    color: white;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.average-button:hover {
+    background-color: #45a049;
+}

@@ -1,0 +1,127 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(
+      content="width=device-width, initial-scale=1.0" 
+      name="viewport"
+      )
+    title Hệ Cơ Sở Dữ Liệu - Bài Tập Lớn Số 2
+    link(
+      href="/css/styles.css" 
+      rel="stylesheet"
+      )
+  body
+    .container
+      // Sidebar
+      .sidebar
+        h3 Welcome ADMIN
+        ul.menu
+          li
+            a(href="/index")
+              img(
+                alt="Home" 
+                src="/icons/home.png"
+                )
+              | Trang Chủ
+          li
+            a(href="/admin")
+              img(
+                alt="Candidate" 
+                src="/icons/candidate.png"
+                )
+              | Quản trị viên
+          li
+            a(href="/recruitmentNews")
+              img(
+                alt="Employer" 
+                src="/icons/employer.png"
+                )
+              | Demo 2
+          li
+            a(href="/userScore")
+              img(
+                alt="Job Post" 
+                src="/icons/job-post.png"
+                )
+              | Demo 3
+          li
+            a(href="/submittedApplication")
+              img(
+                alt="Job Post" 
+                src="/icons/job-post.png"
+                )
+              | Demo 4
+      // Main Content
+      .content
+        h1 TRƯỜNG ĐẠI HỌC BÁCH KHOA
+        h3 KHOA KHOA HỌC VÀ KỸ THUẬT MÁY TÍNH
+        h4 MÔN HỌC: HỆ CƠ SỞ DỮ LIỆU
+        img.logo(
+          alt="BK Logo" 
+          src="/images/logobk.png"
+          )
+        h4 BÀI TẬP LỚN SỐ 2
+        p Giáo viên hướng dẫn: Trần Thị Quế Nguyệt
+        p Nhóm: 5 Lớp: L01
+        // Đăng Ký và Đăng Nhập
+        .auth-buttons
+          //- button.btn.btn-register(onclick="showRegisterPopup()") Đăng Ký
+          button.btn.btn-login(onclick="showLoginPopup()") Đăng Nhập
+    //- // Popup Form Đăng Ký
+    //- #registerPopup.popup
+    //-   .popup-content
+    //-     span.close(onclick="closePopup('registerPopup')") ×
+    //-     h2 Đăng Ký
+    //-     form(method="get" action="/register")
+    //-       label(for="register-username") Tên đăng nhập:
+    //-       input#register-username(
+    //-         required="" 
+    //-         name="Username" 
+    //-         type="text"
+    //-         )
+    //-       label(for="register-password") Mật khẩu:
+    //-       input#register-password(
+    //-         required="" 
+    //-         name="Password" 
+    //-         type="password"
+    //-         )
+    //-       button.btn-submit(onclick="handleOnclickRegister()") Đăng Ký
+    // Popup Form Đăng Nhập
+    #loginPopup.popup
+      .popup-content
+        span.close(onclick="closePopup('loginPopup')") ×
+        h2 Đăng Nhập
+        form(method="get" action="/admin/login")
+          label(for="login-username") Tên đăng nhập:
+          input#login-username(
+            required=""
+            name="Username" 
+            type="text"
+            )
+          label(for="login-password") Mật khẩu:
+          input#login-password(
+            required="" 
+            name="Password" 
+            type="password"
+            )
+          button.btn-submit(type="submit") Đăng Nhập
+    script.
+      // Hiển thị popup
+        function showRegisterPopup() {
+        document.getElementById('registerPopup').style.display = 'flex';
+        }
+        function showLoginPopup() {
+        document.getElementById('loginPopup').style.display = 'flex';
+        }
+        // Đóng popup
+        function closePopup(popupId) {
+        document.getElementById(popupId).style.display = 'none';
+        }
+        async function handleOnclickRegister() {
+          if (document.getElementById('register-username').value === '' 
+              || document.getElementById('register-password').value === '')
+          {
+            alert('Vui lòng nhập đẩy đủ thông tin');
+          }
+        }

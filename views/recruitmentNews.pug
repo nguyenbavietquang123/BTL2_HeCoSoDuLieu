@@ -1,0 +1,236 @@
+doctype html 
+head 
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Tin tuyển dụng
+    link(rel="stylesheet", href="css/recruitmentNews.css")
+    link(href="https://fonts.googleapis.com/icon?family=Material+Icons", rel="stylesheet")
+    link(rel="preconnect", href="https://fonts.googleapis.com")
+    link(rel="preconnect", href="https://fonts.gstatic.com", crossorigin)
+    link(href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,700;1,700&family=Montserrat:ital@0;1&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap", rel="stylesheet")
+body 
+    header
+        nav
+            div(class="logo")
+                a(href="/index") 
+                    img(src="images/nursewebsitelogo.png", alt="")
+                h3 WEBSITE 
+                    br
+                    | TUYỂN DỤNG
+            ul(class="sub-nav")
+                a(href="/") Trang chủ
+                li Danh sách
+                li Cẩm nang 
+                li Bản tin 
+                li Tin tức
+            ul 
+                button.login-button
+                    a(href="/login") Đăng nhập
+            ul
+                button.signin-button
+                    a(href="/register") Đăng ký
+    .container
+        .content
+            .info
+                .info-content
+                    h1.DNYT Tin tuyển dụng
+                .buttons
+                    button Tra cứu
+                    button Chi tiết
+    div(class="average-container", style="display: none;" id="averageSalaries")
+        h3 Bảng lương trung bình theo mã công việc
+        table(class="average-salary-table")
+            thead
+                tr
+                    th Mã công việc
+                    th Tên công việc
+                    th Lương trung bình
+            tbody
+            each item in average 
+                tr 
+                    td #{item.Job_ID}
+                    td #{item.Job_Title}
+                    td #{item.Average_Salary}
+
+                // Dynamically populate rows here using JS
+    button(class="average-button", id="showAverageButton") Hiển thị lương trung bình
+    div(class="container1")
+        div(class="thanh_tim_kiem") 
+        div(class="search")
+            form(action="",method='get',id="search-form")
+                button(type="button", id="filter-button", class="filter-button")
+                    | Bộ lọc
+        div(class="filter-form" id="filterForm", style="display: none;")
+            form(action="/recruitmentNews", method="get", id="filter-form")
+                h3 Tìm kiếm nâng cao
+                div
+                    label(for="filter_Job_Title") Tên công việc:
+                    input(type="text", name="filter_Job_Title", id="filter_Job_Title", placeholder="Tên công việc")
+                div 
+                    label(for="filter_News_ID") Mã tin tuyển dụng:
+                    select(id="filter_News_ID", name="filter_News_ID" )
+                        option(
+                        selected="" 
+                        value="default"
+                        ) Mã tin tuyển dụng
+                        each item in full_news 
+                            option(value=item.News_ID) #{item.News_ID}
+                div 
+                    label(for="filter_Scout_ID") Công ty:
+                    select(id="filter_Scout_ID", name="filter_Scout_ID" )
+                        option(
+                        selected="" 
+                        value="default"
+                        ) Mã nhà tuyển dụng
+                        each item in userID 
+                            option(value=item.Scout_ID) #{item.Company}
+                div
+                    label(for="filter_minSalary") Mức lương tối thiểu:
+                    input(type="number", name="filter_minSalary", id="filter_minSalary", placeholder="Lương tối thiểu")
+                div
+                    label(for="filter_maxSalary") Mức lương tối đa:
+                    input(type="number", name="filter_maxSalary", id="filter_maxSalary", placeholder="Lương tối đa")
+                div
+                    label(for="filter_Location") Địa điểm:
+                    input(type="text", name="filter_Location", id="filter_Location", placeholder="Địa điểm")
+                div(id ="sort")
+                    label(for="sortSalary") Sắp xếp theo:
+                    select(name="sortSalary", id="sortSalary")
+                        option(value="") Sắp xếp lương
+                        option(value="ASC") Tăng dần
+                        option(value="DESC") Giảm dần
+                div
+                    button(type="submit", id="apply-filter-button") Áp dụng bộ lọc
+                button(type="button", id="close-filter-button") Đóng
+        section(class="table")
+            h2 Danh sách các tin tuyển dụng 
+            p(class="chuthich") 
+            div(class="table-wrapper")
+                table(class="content-table",id="myTable")
+                    thead   
+                        tr 
+                            th Tên công ty          
+                            th Tên công việc          
+                            th Địa điểm            
+                            th Lương           
+                            th Ngày đăng
+                            th Deadline 
+                            th Mô tả 
+                            th Phúc lơi
+                            th Thao tác
+                    tbody
+                    -var i=0
+                    each item in news       
+                        tr(id=item.News_ID)  
+                            td(id=item.Scout_ID) #{item.Company}
+                            td(id=item.Job_ID) #{item.Job_Position}
+                            td #{item.Location}                            
+                            td #{item.Salary} 	                               
+                            td #{item.Post_Date}	                              
+                            td #{item.Deadline} 
+                            td #{item.Job_Description}	
+                            td #{item.Benefits}		
+                            td 
+                                button(
+                                    class = "button-delete"
+                                )
+                                    img(src="images/bx-trash.svg")
+                                button(
+                                    class= "button-edit"
+                                    id=++i
+                                )
+                                    img(src="images/bx-edit-alt.svg")
+        div(class="modal" id="addModal" style="display: none;")
+            div(class="modal-content")
+                button(type="button", class="close-add-button", id="close-add-modal") &times;
+                h2 Thêm thông tin tuyển dụng
+                form(id="add-form", action="/recruitmentNews/add", method="post")
+                    div
+                        label(for="add_ID") Mã tin:
+                        input(type="text", id="add_ID", name="add_ID")
+                    div
+                        label(for="add_Scout_ID") Công ty:
+                        select(id="add_Scout_ID", name="add_Scout_ID" )
+                            option(
+                            selected="" 
+                            value="default"
+                            ) Chọn công ty(Bắt buộc)
+                            each item in userID 
+                                option(value=item.Scout_ID) #{item.Company}
+                    div
+                        label(for="add_Job_Position") Vị trí:
+                        input(type="text", id="add_Job_Position", name="add_Job_Position")
+                    div
+                        label(for="add_Job") Công việc:
+                        select(id="add_Job", name="add_Job")
+                            option(
+                            selected="" 
+                            value="default"
+                            ) Chọn loại công việc (Bắt buộc)
+                            each item in jobs
+                                option(value=item.Job_ID) #{item.Job_Title}
+                    div
+                        label(for="add_Location") Địa điểm:
+                        input(type="text", id="add_Location", name="add_Location")
+                    div
+                        label(for="add_Salary") Lương:
+                        input(type="text", id="add_Salary", name="add_Salary")
+                    div
+                        label(for="add_Post_Date") Ngày tuyển:
+                        input(type="date", id="add_Post_Date", name="add_Post_Date")
+                    div
+                        label(for="add_Deadline") Deadline:
+                        input(type="date", id="add_Deadline", name="add_Deadline")
+                    div
+                        label(for="add_Job_Description") Mô tả công việc:
+                        textarea(id="add_Job_Description", name="add_Job_Description")
+                    div
+                        label(for="add_Benefits") Phúc lợi:
+                        textarea(id="add_Benefits", name="add_Benefits")
+                    div
+                        button(id="save-add") Lưu thay đổi
+        div(class="modal" id="editModal" style="display: none;")
+            div(class="modal-content")
+                button(type="button", class="close-button", id="close-modal") &times;
+                h2 Chỉnh sửa thông tin tuyển dụng
+                form(id="edit-form", action="/recruitmentNews/update", method="post")
+                    div
+                        label(for="ID") Mã tin:
+                        input(type="text", id="ID", name="ID", readonly)
+                    div
+                        label(for="Scout_ID") Mã nhà tuyển dụng:
+                        input(type="text", id="Scout_ID", name="Scout_ID", readonly)
+                    div
+                        label(for="Job_Position") Vị trí:
+                        input(type="text", id="Job_Position", name="Job_Position")
+                    div
+                        label(for="Job") Công việc:
+                        select(id="Job", name="Job")
+                            each item in jobs
+                                option(value=item.Job_ID) #{item.Job_Title}
+                    div
+                        label(for="Location") Địa điểm:
+                        input(type="text", id="Location", name="Location")
+                    div
+                        label(for="Salary") Lương:
+                        input(type="text", id="Salary", name="Salary")
+                    div
+                        label(for="Post_Date") Ngày đăng:
+                        input(type="date", id="Post_Date", name="Post_Date")
+                    div
+                        label(for="Deadline") Deadline:
+                        input(type="date", id="Deadline", name="Deadline")
+                    div
+                        label(for="Job_Description") Mô tả công việc:
+                        textarea(id="Job_Description", name="Job_Description")
+                    div
+                        label(for="Benefits") Phúc lợi:
+                        textarea(id="Benefits", name="Benefits")
+                    div
+                        button(id="save-edit") Lưu thay đổi
+    button(class="add-button", id="addRecruitmentButton") Thêm tin tuyển dụng                
+    script(src="js/handleRecruitmentEdit.js") 
+    script(src="js/handleFilter.js")
+    script(src="js/handleAddingRecruitment.js")
+    script(src="js/handleDeletingRecruitment.js") 
+    script(src="js/handleAverageSalary.js") 

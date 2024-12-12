@@ -1,0 +1,210 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(
+      content="width=device-width, initial-scale=1.0" 
+      name="viewport"
+      )
+    title Thông tin cá nhân
+    link(
+      href="/css/user_info.css" 
+      rel="stylesheet"
+      )
+  body
+    .container
+      // Sidebar
+      .sidebar
+        h3 Welcome
+        ul.menu
+          li
+            a(href="/index")
+              img(
+                alt="Home" 
+                src="/icons/home.png"
+                )
+              | Trang Chủ
+          li
+            a(href="/ung-vien")
+              img(
+                alt="Candidate" 
+                src="/icons/candidate.png"
+                )
+              | Ứng Viên
+          li
+            a(href="/nha-tuyen-dung")
+              img(
+                alt="Employer" 
+                src="/icons/employer.png"
+                )
+              | Nhà Tuyển Dụng
+          li
+            a(href="/tin-tuyen-dung")
+              img(
+                alt="Job Post" 
+                src="/icons/job-post.png"
+                )
+              | Tin Tuyển Dụng
+      // Main Content
+      .content
+        h1 Thông tin cá nhân
+        button.btn-delete(
+          id="userData"
+          type="button"
+          value=userData
+          onclick="deleteAccount()"
+        ) Xóa tài khoản
+        p 
+        form.register-form(
+          enctype="multipart/form-data" 
+          method="POST" 
+          id="UpdateInfoForm"
+          )
+          input(type="hidden" name="username" value=userData.Username)
+          input(type="hidden" name="password" value=userData.Password)
+          label(for="picture") Avatar:
+          input#avatar(
+            
+            accept="image/*" 
+            name="picture" 
+            type="file"
+            value=userData.Avatar
+            )
+          label(for="picture") Logo Công Ty:
+          input#companyLogo(
+            
+            accept="image/*" 
+            name="picture" 
+            type="file"
+           
+            )
+          label(for="company") Công Ty:
+          input#company(
+            value=userData.Company 
+            name="company" 
+            type="text"
+            placeholder="Nhập tên công ty"
+            )
+          label(for="email") Email:
+          input#email(
+           
+            name="email" 
+            type="email"
+            )
+          label(for="gender") Giới Tính:
+          select#gender(
+            //- required="" 
+            name="gender"
+            )
+            option(value=userData.Gender) #{userData.Gender}
+            option(value="Male") Male
+            option(value="Female") Female
+            option(value="Other") Other
+          label(for="phone") Số Điện Thoại:
+          input#phone(
+            required="" 
+            value=userData.Phone 
+            name="phone" 
+            type="tel"
+            )
+          input(type="hidden" id="birthdateValue" value=userData.Birthdate)
+          label(for="birthdate") Ngày sinh
+          input#birthdate(
+            name="birthdate" 
+           
+            type="date"
+            )
+          label(for="address") Địa Chỉ:
+          input#address(
+            value=userData.Address 
+            name="address" 
+            type="text"
+            )
+          label(for="lastname") Họ:
+          input#lastname(
+            
+            value=userData.Lastname 
+            name="lastname" 
+            type="text"
+            )
+          label(for="middlename") Tên Đệm:
+          input#middlename(
+            value=userData.Middlename 
+            name="middlename" 
+            type="text"
+            )
+          label(for="firstname") Tên:
+          input#firstname(
+          
+            value=userData.Firstname 
+            name="firstname" 
+            type="text"
+            )
+          button.btn-submit(type="submit") Hoàn Tất
+    script.
+      // Xử lý sự kiện submit bằng JavaScript
+      document.getElementById('UpdateInfoForm').addEventListener('submit', async function (e) {
+        e.preventDefault(); // Ngăn chặn hành vi submit mặc định
+        
+        // Tạo đối tượng FormData từ form
+        const formData = new FormData(this);
+
+        try {
+          // Gửi yêu cầu POST với FormData thay vì JSON
+          const response = await fetch('/update_scout_info', {
+            method: 'POST',
+            body: formData,
+          });
+         
+          // Kiểm tra kết quả
+          if (response.status === 200) {
+            alert('Cập nhật thông tin thành công!'); // Hiển thị thông báo thành công
+            window.location.href = '/recruitment-news-index?Username=' + formData.get('username');
+          } else {
+            const error = await response.json();
+            alert('Cập nhật thông tin thất bại! ' + (error.message || 'Có lỗi xảy ra.'));
+          }
+        } catch (err) {
+          console.error(err);
+          alert('Đã xảy ra lỗi trong quá trình gửi yêu cầu. ' + err.message);
+        }
+      });
+
+      async function deleteAccount() {
+        try {
+          const userData = JSON.parse(document.getElementById('userData').value);
+          alert('Xóa tài khoản');
+          const response = await fetch('/delete_account?Username=' + userData['Username']  + '&Password=' + userData['Password'], {
+            method: 'DELETE',
+          });
+          if (response.status === 200) {  
+            alert('Xóa tài khoản thành công!');
+            window.location.href = '/index';
+          } else {
+            alert('Xóa tài khoản thất bại!');
+          }
+        } catch (error) {
+          console.error('Lỗi khi xóa tài khoản:', error);
+        }
+      }
+    
+    script.
+      // Chuỗi ngày ban đầu
+      document.addEventListener('DOMContentLoaded', () => {
+        const dateString = document.getElementById("birthdateValue").value;
+
+        // Chuyển chuỗi thành đối tượng Date
+        const date = new Date(dateString);
+
+        // Lấy các thành phần ngày, tháng, năm
+        const day = date.getDate().toString().padStart(2, '0'); // Lấy ngày (dd)
+        const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Lấy tháng (mm)
+        const year = date.getFullYear(); // Lấy năm (yyyy)
+
+        // Định dạng lại thành yyyy-MM-dd
+        const formattedDate = `${year}-${month}-${day}`;
+
+        // Gán giá trị định dạng vào input[type="date"]
+        document.getElementById("birthdate").value = formattedDate;
+      });
+  
